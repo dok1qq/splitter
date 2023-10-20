@@ -1,0 +1,23 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+
+.app {
+  width: 100%;
+  height: 100%;
+
+  border: 2px solid red;
+}
