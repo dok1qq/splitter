@@ -50,10 +50,12 @@ export function Splitter(props: PropsWithChildren<SplitterProps>) {
     const containerRect = ref.getBoundingClientRect();
     const resizerRect = resizer.getBoundingClientRect();
 
+    const maxX = containerRect.width - resizerRect.width;
     const maxY = containerRect.height - resizerRect.height;
+    const halfResizerWidth = Math.floor(resizerRect.width / 2);
     const halfResizerHeight = Math.floor(resizerRect.height / 2);
 
-    function mouseMove(event: MouseEvent) {
+    function verticalMouseMove(event: MouseEvent) {
       let newY = event.clientY - containerRect.y - halfResizerHeight;
 
       if (newY < 0) {
@@ -66,6 +68,22 @@ export function Splitter(props: PropsWithChildren<SplitterProps>) {
 
       first.style.height = `${newY}px`;
     }
+
+    function horizontalMouseMove(event: MouseEvent) {
+      let newX = event.clientX - containerRect.x - halfResizerWidth;
+
+      if (newX < 0) {
+        newX = 0;
+      }
+
+      if (newX > maxX) {
+        newX = maxX;
+      }
+
+      first.style.width = `${newX}px`;
+    }
+
+    const mouseMove = props.direction === 'vertical' ? verticalMouseMove : horizontalMouseMove;
 
     function mouseUp() {
       document.removeEventListener('mousemove', mouseMove);
