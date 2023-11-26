@@ -3,33 +3,9 @@ import './splitter.css';
 
 type SplitterDirection = 'horizontal' | 'vertical';
 
-interface SplitterBase {
+interface SplitterProps {
   direction: SplitterDirection;
-  renderResizer(): React.JSX.Element;
 }
-
-interface HorizontalSplitter extends SplitterBase {
-  direction: 'horizontal';
-  renderLeft(): React.JSX.Element;
-  renderRight(): React.JSX.Element;
-}
-
-interface VerticalSplitter extends SplitterBase {
-  direction: 'vertical';
-  renderTop(): React.JSX.Element;
-  renderBottom(): React.JSX.Element;
-}
-
-type SplitterProps = HorizontalSplitter | VerticalSplitter;
-
-function isVerticalSplitter(props: SplitterProps): props is VerticalSplitter {
-  return props.direction === 'vertical';
-}
-
-function isHorizontalSplitter(props: SplitterProps): props is HorizontalSplitter {
-  return props.direction === 'horizontal';
-}
-
 
 export function Splitter(props: PropsWithChildren<SplitterProps>) {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -110,25 +86,13 @@ export function Splitter(props: PropsWithChildren<SplitterProps>) {
     };
   }, []);
 
-  if (isVerticalSplitter(props)) {
-    return (
-      <div className={`split-container__${props.direction}`} ref={containerRef}>
-        <div className="first">{props.renderTop()}</div>
-        <div className="resizer">{props.renderResizer()}</div>
-        <div className="second">{props.renderBottom()}</div>
-      </div>
-    );
-  }
+  const [firstChildren, resizerChildren, secondChildren] = React.Children.toArray(props.children);
 
-  if (isHorizontalSplitter(props)) {
-    return (
-      <div className={`split-container__${props.direction}`} ref={containerRef}>
-        <div className="first">{props.renderLeft()}</div>
-        <div className="resizer">{props.renderResizer()}</div>
-        <div className="second">{props.renderRight()}</div>
-      </div>
-    );
-  }
-
-  return null;
+  return (
+    <div className={`split-container__${props.direction}`} ref={containerRef}>
+      <div className="first">{firstChildren}</div>
+      <div className="resizer">{resizerChildren}</div>
+      <div className="second">{secondChildren}</div>
+    </div>
+  );
 }
