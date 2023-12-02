@@ -1,14 +1,14 @@
 const esbuild = require('esbuild');
 
 esbuild.context({
-    entryPoints: ['./docs/main.tsx'],
+    entryPoints: ['./app/main.tsx'],
     bundle: true,
-    outfile: './public/main.js',
+    outfile: './docs/main.js',
     sourcemap: false,
     minify: true,
 }).then((context) => {
     context
-        .serve({ servedir: 'public', port: 3000 })
+        .serve({ servedir: 'docs', port: 3000 })
         .then(({ host, port }) => console.log(`Listen ${host}:${port}`))
         .catch(console.log);
 });

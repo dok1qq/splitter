@@ -1,6 +1,6 @@
 # Splitter
 
-## Expample
+## Usage example
 ```jsx
 import '...css';
 import { Splitter } from '...';
