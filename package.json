@@ -7,7 +7,7 @@
     "dist"
   ],
   "scripts": {
-    "start": "vite",
+    "start": "node serve --watch",
     "build": "node build.js && tsc"
   },
   "devDependencies": {

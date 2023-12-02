@@ -1,0 +1,88 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  --taupe-gray: #84828F;
+  --dim-gray: #6A687A;
+  --paynes-gray: #536271;
+  --charcoal: #3E4C5E;
+  --prussian-blue: #2C3D55;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+  padding: 12px;
+
+  background-color: var(--prussian-blue);
+}
+
+.app > * + * {
+  margin-top: 50px;
+}
+
+.side {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+
+  background-color: var(--taupe-gray);
+}
+
+
+.top {
+  border-radius: 12px;
+  height: 100%;
+
+  background-color: var(--paynes-gray);
+}
+
+.bottom {
+  border-radius: 12px;
+  height: 100%;
+
+  background-color: var(--dim-gray);
+}
+
+.separator-v {
+  height: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+.separator-v::after {
+  content: '';
+  border-bottom: 3px dotted gray;
+  width: 22px;
+}
+
+.separator-h {
+  height: 100%;
+  width: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+.separator-h::after {
+  content: '';
+  border-right: 3px dotted gray;
+  height: 22px;
+}
