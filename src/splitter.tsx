@@ -1,10 +1,14 @@
 import React, { PropsWithChildren, useEffect, useRef } from 'react';
 import './splitter.css';
+import { clamp } from './utils';
 
 type SplitterDirection = 'horizontal' | 'vertical';
 
 interface SplitterProps {
   direction: SplitterDirection;
+  side?: number;
+  min?: number;
+  max?: number;
 }
 
 export function Splitter(props: PropsWithChildren<SplitterProps>) {
@@ -31,15 +35,23 @@ export function Splitter(props: PropsWithChildren<SplitterProps>) {
     const halfResizerWidth = Math.floor(resizerRect.width / 2);
     const halfResizerHeight = Math.floor(resizerRect.height / 2);
 
+    const vertical = props.direction === 'vertical';
+
+    let min = 0;
+    let max = vertical ? maxY : maxX;
+
+    if (props.min) min = clamp(props.min, 0, vertical ? maxY : maxX);
+    if (props.max) max = clamp(props.max, 0, vertical ? maxY : maxX);
+
     function verticalMouseMove(event: MouseEvent) {
       let newY = event.clientY - containerRect.y - halfResizerHeight;
 
-      if (newY < 0) {
-        newY = 0;
+      if (newY < min) {
+        newY = min;
       }
 
-      if (newY > maxY) {
-        newY = maxY;
+      if (newY > max) {
+        newY = max;
       }
 
       first.style.height = `${newY}px`;
@@ -48,18 +60,18 @@ export function Splitter(props: PropsWithChildren<SplitterProps>) {
     function horizontalMouseMove(event: MouseEvent) {
       let newX = event.clientX - containerRect.x - halfResizerWidth;
 
-      if (newX < 0) {
-        newX = 0;
+      if (newX < min) {
+        newX = min;
       }
 
-      if (newX > maxX) {
-        newX = maxX;
+      if (newX > max) {
+        newX = max;
       }
 
       first.style.width = `${newX}px`;
     }
 
-    const mouseMove = props.direction === 'vertical' ? verticalMouseMove : horizontalMouseMove;
+    const mouseMove = vertical ? verticalMouseMove : horizontalMouseMove;
 
     function mouseUp() {
       document.removeEventListener('mousemove', mouseMove);
@@ -78,11 +90,19 @@ export function Splitter(props: PropsWithChildren<SplitterProps>) {
     }
 
     resizer.addEventListener('mousedown', mouseDown);
-    resizer.addEventListener('ondragstart', dragStart)
+    resizer.addEventListener('ondragstart', dragStart);
+
+    if (props.side) {
+      if (vertical) {
+        first.style.height = `${props.side}px`;
+      } else {
+        first.style.width = `${props.side}px`;
+      }
+    }
 
     return () => {
       resizer.removeEventListener('mousedown', mouseDown);
-      resizer.removeEventListener('ondragstart', dragStart)
+      resizer.removeEventListener('ondragstart', dragStart);
     };
   }, []);
 

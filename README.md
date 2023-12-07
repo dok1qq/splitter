@@ -18,6 +18,9 @@ function App() {
 
 ## Props
 
-| Property  |    Description   |           Type           | Default |
-|-----------| ---------------- |:------------------------:|:-------:|
-| direction | Determine layout | 'vertical', 'horizontal' |    -    |
+| Property  | Description        |           Type           |   Default   |
+|-----------|--------------------|:------------------------:|:-----------:|
+| direction | Determine layout   | 'vertical', 'horizontal' |      -      |
+| side      | Initial split size |          number          |      -      |
+| min       | Min split size     |          number          |      0      |
+| max       | Max split size     |          number          | Max content |
