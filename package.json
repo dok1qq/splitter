@@ -7,8 +7,9 @@
     "dist"
   ],
   "scripts": {
-    "start": "node serve --watch",
-    "build": "node build.js && tsc"
+    "start": "node ./scripts/serve.js --watch",
+    "build": "node ./scripts/build-app.js",
+    "build:lib": "node ./scripts/build-lib.js && tsc"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

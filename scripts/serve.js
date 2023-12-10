@@ -4,8 +4,8 @@ esbuild.context({
     entryPoints: ['./app/main.tsx'],
     bundle: true,
     outfile: './docs/main.js',
-    sourcemap: false,
-    minify: true,
+    sourcemap: true,
+    minify: false,
 }).then((context) => {
     context
         .serve({ servedir: 'docs', port: 3000 })
