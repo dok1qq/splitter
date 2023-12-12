@@ -1,5 +1,7 @@
 # Splitter
 
+[Demo]
+
 ## Usage example
 ```jsx
 import '...css';
@@ -24,3 +26,6 @@ function App() {
 | side      | Initial split size |          number          |      -      |
 | min       | Min split size     |          number          |      0      |
 | max       | Max split size     |          number          | Max content |
+
+
+[Demo]: https://dok1qq.github.io/splitter/
