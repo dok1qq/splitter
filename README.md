@@ -1,5 +1,7 @@
 # Splitter
 
+Minimal react splitter component
+
 [Demo]
 
 ## Usage example

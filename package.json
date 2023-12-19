@@ -1,7 +1,8 @@
 {
-  "name": "splitter",
+  "name": "@dok1qq/splitter",
   "version": "0.0.1",
   "type": "commonjs",
+  "description": "Minimal react splitter component",
   "main": "dist/index.js",
   "files": [
     "dist"
