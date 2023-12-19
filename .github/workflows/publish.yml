@@ -22,6 +22,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+          scope: '@dok1qq'
       - name: Install
         run: npm i
       - name: Build
